@@ -10,7 +10,7 @@
       <!-- Barra horizontal separadora -->
       <hr />
       <!-- Boton para finalizar las compras -->
-      <finalizarCompra> </finalizarCompra>
+      <finalizarCompra> </finalizarCompra> 
 
       <!-- Carrusel de productos Listos para comprar -->
       <carrusel :tasks="tasks"> </carrusel>
