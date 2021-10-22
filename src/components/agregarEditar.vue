@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-chip-group>
-      <v-container>
-        <v-card hover elevation="5" class="my-1 mb-1 px-1 pb-1 mt-1">
-          <v-row>
+      <v-card hover elevation="0" class="my-1 mb-1 px-1 pb-1 mt-1">
+        <v-container>
+          <v-row :justify="'start'">
             <v-col>
               <!-- Primera columna es la creacion de nuevos productos -->
               <v-dialog
@@ -164,8 +164,8 @@
               </v-dialog>
             </v-col>
           </v-row>
-        </v-card>
-      </v-container>
+        </v-container>
+      </v-card>
     </v-chip-group>
   </div>
 </template>

@@ -3,28 +3,27 @@
     <hr />
     <v-card elevation="5" shaped outlined>
       <v-list-item v-for="(task, index) in $store.state.comprados" :key="index">
-        <template>
-          <v-list-item-content>
-            <v-chip-group>
-              <v-list-item-title
-                :class="{ 'text-decoration-line-through': task.done }">
-                <h5> {{ task.titulo }} </h5>
-                <v-spacer>
-                  <h5> Precio: {{ task.precio }} </h5>
-                </v-spacer>
-                <v-spacer>
-                  <h5> Unidades: {{ task.unidades }} </h5>
-                </v-spacer>
-              </v-list-item-title>
-            </v-chip-group>
-            <h5> Subtotal {{ task.precio * task.unidades }} </h5>
-          </v-list-item-content>
-        </template>
-        <v-chip-group>
-          <v-btn
+        <v-list-item-content>
+          <v-chip-group>
+            <v-list-item-title
+              :class="{ 'text-decoration-line-through': task.done }"
+            >
+              <h5>{{ task.titulo }}</h5>
+              <v-spacer>
+                <h5>Precio: {{ task.precio }}</h5>
+              </v-spacer>
+              <v-spacer>
+                <h5>Unidades: {{ task.unidades }}</h5>
+              </v-spacer>
+            </v-list-item-title>
+          </v-chip-group>
+          <h5>Subtotal {{ task.precio * task.unidades }}</h5>
+
+          <v-chip-group>
+            <v-btn
               rounded
               color="primary"
-              elevation="24"
+              elevation="0"
               dark
               class="mr-2"
               @click="aumentar_cantidad(index)"
@@ -35,7 +34,7 @@
             <v-btn
               rounded
               color="primary"
-              elevation="24"
+              elevation="0"
               dark
               class="mr-2"
               @click="disminuir_cantidad(index)"
@@ -46,14 +45,15 @@
             <v-btn
               rounded
               color="primary"
-              elevation="24"
+              elevation="0"
               dark
               class="mr-2"
               @click="eliminar_producto(index)"
             >
               <v-icon> mdi-delete </v-icon>
             </v-btn>
-        </v-chip-group>
+          </v-chip-group>
+        </v-list-item-content>
       </v-list-item>
       <hr />
       <strong> Totales: {{ $store.state.total_compra }} </strong>
