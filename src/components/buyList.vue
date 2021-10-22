@@ -4,22 +4,20 @@
     <v-card elevation="5" shaped outlined>
       <v-list-item v-for="(task, index) in $store.state.comprados" :key="index">
         <template>
-          <v-list-item-action> </v-list-item-action>
-
           <v-list-item-content>
             <v-chip-group>
               <v-list-item-title
-                :class="{ 'text-decoration-line-through': task.done }"
-                ><h5>{{ task.titulo }}</h5>
+                :class="{ 'text-decoration-line-through': task.done }">
+                <h5> {{ task.titulo }} </h5>
                 <v-spacer>
-                  <h5>Precio unidad: {{ task.precio }}</h5>
+                  <h5> Precio: {{ task.precio }} </h5>
                 </v-spacer>
                 <v-spacer>
-                  <h5>Unidades: {{ task.unidades }}</h5>
+                  <h5> Unidades: {{ task.unidades }} </h5>
                 </v-spacer>
               </v-list-item-title>
             </v-chip-group>
-            <h5>Subtotal {{ task.precio * task.unidades }}</h5>
+            <h5> Subtotal {{ task.precio * task.unidades }} </h5>
           </v-list-item-content>
         </template>
         <v-chip-group>

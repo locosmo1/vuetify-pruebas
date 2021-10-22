@@ -20,7 +20,9 @@
             elevation="24"
             class="my-1 mb-1 px-1 pb-1 mt-1"
           >
-            <v-img :src="agregar_imagen_lista(index)"> </v-img>
+            <v-card hover elevation="8" class="my-1 mb-1 px-1 pb-1 mt-1">
+              <v-img :src="agregar_imagen_lista(index)"> </v-img>
+            </v-card>
             <v-card-title>
               <strong>Precio: {{ task.precio }}</strong>
             </v-card-title>
@@ -79,9 +81,7 @@ export default {
     };
   },
   methods: {
-    cardFocus(id) {
-      
-    },
+    cardFocus(id) {},
 
     add_amigo() {
       this.$store.state.amigo = this.amigo_nuevo;

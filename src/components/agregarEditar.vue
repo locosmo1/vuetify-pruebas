@@ -1,144 +1,177 @@
 <template>
   <div>
     <v-chip-group>
-      <v-dialog absolute v-model="$store.state.dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-          <v-card-actions class="px-3 pb-3">
-            <v-spacer></v-spacer>
-            <v-btn
-              rounded
-              color="primary"
-              elevation="24"
-              dark
-              v-bind="attrs"
-              v-on="on"
-              @click="$store.state.editar = false"
-            >
-              <v-icon left> mdi-cart-plus </v-icon>
-              Nuevo Producto
-            </v-btn>
-          </v-card-actions>
-        </template>
-
-        <v-card elevation="5" shaped outlined>
-        <v-row>
-          <v-col
-            v-for="n in this.fotos.length"
-            :key="n"
-            class="d-flex child-flex"
-            cols="4"
-          >
-            <!--Boton que sea una imagen y dentro de el tenga href -->
-            <v-img
-              :src="retornar_Imagen(n)"
-              aspect-ratio="1"
-              class="grey lighten-2"
-              @click="agregar_imagen_editar(n)"
-            >
-            </v-img>
-
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-col>
-        </v-row>
-
-        <v-container>
+      <v-container>
+        <v-card hover elevation="5" class="my-1 mb-1 px-1 pb-1 mt-1">
           <v-row>
-            <v-col cols="3" sm="3" md="5">
-                <v-text-field v-model="buscar" label="Buscar"></v-text-field>
-              <v-btn
-                @click="obtenerImagenes()"
-                class="mx-2"
-                fab
-                dark
-                color="indigo"
+            <v-col>
+              <!-- Primera columna es la creacion de nuevos productos -->
+              <v-dialog
+                absolute
+                v-model="$store.state.dialog"
+                max-width="500px"
               >
-                <v-icon dark> mdi-magnify-plus-outline </v-icon>
-              </v-btn>
-              <v-btn
-                @click="mas_Imagenes()"
-                class="mx-2"
-                fab
-                dark
-                color="indigo"
+                <template v-slot:activator="{ on, attrs }">
+                  <v-card-actions class="px-3 pb-3">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      rounded
+                      color="primary"
+                      elevation="24"
+                      dark
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="$store.state.editar = false"
+                    >
+                      <v-icon left> mdi-cart-plus </v-icon>
+                      Nuevo Producto
+                    </v-btn>
+                  </v-card-actions>
+                </template>
+
+                <v-card elevation="24" shaped>
+                  <v-row xs="12" sm="11" md="10" lg="8" xl="8">
+                    <v-col
+                      v-for="n in this.fotos.length"
+                      :key="n"
+                      class="d-flex child-flex"
+                      cols="4"
+                    >
+                      <!--Boton que sea una imagen y dentro de el tenga href -->
+                      <v-card
+                        hover
+                        elevation="5"
+                        class="my-1 mb-1 px-1 pb-1 mt-1"
+                      >
+                        <v-img
+                          :src="retornar_Imagen(n)"
+                          aspect-ratio="1"
+                          class="grey lighten-2"
+                          @click="agregar_imagen_editar(n)"
+                        >
+                        </v-img>
+                      </v-card>
+
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-col>
+                  </v-row>
+
+                  <v-container>
+                    <v-row>
+                      <v-col cols="3" sm="3" md="5">
+                        <v-text-field
+                          v-model="buscar"
+                          label="Buscar"
+                        ></v-text-field>
+                        <v-btn
+                          @click="obtenerImagenes()"
+                          class="mx-2"
+                          fab
+                          dark
+                          color="indigo"
+                        >
+                          <v-icon dark> mdi-magnify-plus-outline </v-icon>
+                        </v-btn>
+                        <v-btn
+                          @click="mas_Imagenes()"
+                          class="mx-2"
+                          fab
+                          dark
+                          color="indigo"
+                        >
+                          <v-icon dark> mdi-plus </v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+
+                  <!-- Opciones de editar y nuevo producto -->
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.titulo"
+                            label="Titulo"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.subtitulo"
+                            label="Subtitulo"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.precio"
+                            label="Precio"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="cancelar">
+                      Cancelar
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="nuevo()">
+                      Guardar
+                    </v-btn>
+                  </v-card-actions>
+                  <v-divider></v-divider>
+                </v-card>
+              </v-dialog>
+            </v-col>
+
+            <!--Segunda columna es para ver todos los productos que hay en el carrito -->
+            <v-col>
+              <v-dialog
+                absolute
+                v-model="$store.state.dialogProductos"
+                max-width="500px"
               >
-                <v-icon dark> mdi-plus </v-icon>
-              </v-btn>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-card-actions class="px-3 pb-3">
+                    <v-btn
+                      v-bind="attrs"
+                      v-on="on"
+                      rounded
+                      color="primary"
+                      elevation="24"
+                      dark
+                    >
+                      <v-icon left> mdi-cart-outline </v-icon>
+                      Ir a carrito
+                    </v-btn>
+                  </v-card-actions>
+                </template>
+
+                <!-- AQUI LAS PRODUCTOS DEL CARRITO DE COMPRAS -->
+                <buy-list> </buy-list>
+              </v-dialog>
             </v-col>
           </v-row>
-        </v-container>
-
-         <!-- Opciones de editar y nuevo producto -->
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field
-                    v-model="editedItem.titulo"
-                    label="Titulo"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field
-                    v-model="editedItem.subtitulo"
-                    label="Subtitulo"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field
-                    v-model="editedItem.precio"
-                    label="Precio"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="cancelar">
-              Cancelar
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="nuevo()"> Guardar </v-btn>
-          </v-card-actions>
-        <v-divider></v-divider>
         </v-card>
-      </v-dialog>
-
-      
-      <v-dialog absolute v-model="$store.state.dialogProductos" max-width="500px">
-        <template v-slot:activator="{ on, attrs }">
-          <v-card-actions class="px-3 pb-3">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              rounded
-              color="primary"
-              elevation="24"
-              dark
-            >
-              <v-icon left> mdi-cart-outline </v-icon>
-              Ir a carrito
-            </v-btn>
-          </v-card-actions>
-        </template>
-
-        <!-- AQUI LAS PRODUCTOS DEL CARRITO DE COMPRAS -->
-        <buy-list> </buy-list>
-        
-      </v-dialog>
+      </v-container>
     </v-chip-group>
   </div>
 </template>
 
 <script>
-import BuyList from './buyList.vue';
+import BuyList from "./buyList.vue";
 export default {
   name: "agregarEditar",
   props: {
