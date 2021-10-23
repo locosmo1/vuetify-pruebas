@@ -68,12 +68,17 @@
           </v-card-text>
 
           <v-card-actions>
-            
             <v-spacer> </v-spacer>
-            
-            <v-btn color="primary" class="mb-2" dark @click="terminarCompra = false"> Cancelar </v-btn>
 
-            
+            <v-btn
+              color="primary"
+              class="mb-2"
+              dark
+              @click="terminarCompra = false"
+            >
+              Cancelar
+            </v-btn>
+
             <!-- Boton guardar datos del usuario supermasivo -->
             <v-dialog absolute v-model="botonGuardar" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
@@ -92,34 +97,48 @@
               </template>
 
               <v-card elevation="5" shaped outlined>
-                <!-- datos de los productos a comprar -->
                 <v-card-text>
                   <v-container>
-                    <v-row cols="10" sm="4" md="10" class="d-flex child-flex">
-                      <v-alert type="success">
-                        <h4>Productos a comprar</h4>
-                      </v-alert>
+                    <v-row>
+                      <div><v-btn disabled></v-btn></div>
                     </v-row>
+                    <!-- datos de los productos a comprar -->
+                    <v-row>
+                      <div>
+                        <div class="text-center d-flex pb-4">
+                          <v-btn @click="all"> Expandir </v-btn>
+                          <v-btn @click="none"> Contraer </v-btn>
+                        </div>
 
-                    <v-row
-                      cols="12"
-                      sm="4"
-                      md="10"
-                      v-for="(elemento, indice) in $store.state.comprados"
-                      :key="indice"
-                      class="d-flex child-flex"
-                    >
-                      <v-alert type="success">
-                        {{ getDatos(indice) }} <br />
-                      </v-alert>
+                        <v-expansion-panels v-model="panel" multiple>
+                          <v-expansion-panel
+                            v-for="(elemento, indice) in $store.state.comprados"
+                            :key="indice"
+                          >
+                            <v-expansion-panel-header
+                              >Producto
+                              {{ indice + 1 }}</v-expansion-panel-header
+                            >
+                            <v-expansion-panel-content>
+                              <v-alert type="success">
+                                {{ $store.getters.comprados[indice].titulo }}
+                                <br />
+                                Precio:
+                                {{ $store.getters.comprados[indice].precio }}
+                                <br />
+                                Unidades:
+                                {{ $store.getters.comprados[indice].unidades }}
+                                <br />
+                                Subtotal: 
+                                {{ $store.getters.comprados[indice].precio*$store.getters.comprados[indice].unidades }}
+                                <br />
+                              </v-alert>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </div>
                     </v-row>
-                    <v-alert
-                      color="primary"
-                      dark
-                      icon="mdi-vuetify"
-                      border="left"
-                      prominent
-                    >
+                    <v-alert dark prominent type="success">
                       <strong> Total: {{ $store.state.total_compra }} </strong>
                     </v-alert>
                   </v-container>
@@ -155,16 +174,17 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="terminarCompra = false">
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="terminarCompra = false"
+                  >
                     Salir
                   </v-btn>
                 </v-card-actions>
               </v-card>
               <v-divider></v-divider>
             </v-dialog>
-
-            
-
           </v-card-actions>
         </v-card>
         <v-divider></v-divider>
@@ -185,9 +205,10 @@ export default {
     direccion: "Calle 10a",
     telefono: "3508426005",
     tarjeta: "1651610321321",
+    panel: [],
+    items: 5,
   }),
   methods: {
-
     getDatos(indice) {
       return (
         this.$store.getters.comprados[indice].titulo +
@@ -206,6 +227,14 @@ export default {
         "Unidades: " + this.$store.getters.comprados[indice].unidades + "."
       }
       return acum*/
+    },
+
+    all() {
+      this.panel = [...Array(this.items).keys()].map((k, i) => i);
+    },
+    // Reset the panel
+    none() {
+      this.panel = [];
     },
   },
 };

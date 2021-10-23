@@ -101,6 +101,7 @@ export default {
       { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },
       { title: "Cards", icon: "mdi-card-multiple-outline", to: "/cards" },
       { title: "Base de datos", icon: "mdi-database", to: "/consultas" },
+      { title: "login", icon: "mdi-database", to: "/Login" },
     ],
   }),
   methods: {
@@ -135,6 +136,7 @@ export default {
         { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },
         { title: "Cards", icon: "mdi-card-multiple-outline", to: "/cards" },
         { title: "Base de datos", icon: "mdi-database", to: "/consultas" },
+        { title: "login", icon: "mdi-database", to: "/Login" },
       ];
     },
 
