@@ -11,24 +11,14 @@
       dark
     >
       <v-list>
-        <v-list-item>
-          <v-list-item-icon>
-            <v-icon></v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+            <img src="https://scontent.fbog15-1.fna.fbcdn.net/v/t1.18169-9/16807548_1174372649298950_4288151154757326868_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_eui2=AeFdpsTiBbc-9P5M72WzDODZHMQRXskdnZQcxBFeyR2dlGpF_DBEmk03fYJk8ktzatRu3j9dhfm40qJs7V5di14S&_nc_ohc=fk9TGTSrtOIAX-QY5pO&_nc_ht=scontent.fbog15-1.fna&oh=0e086079e48a9761c6ea3279d02e9977&oe=619A224B" />
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Jane Smith</v-list-item-title>
-            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+            <v-list-item-title>Jhonatan stiwar</v-list-item-title>
+            <v-list-item-subtitle>Conectado</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -50,7 +40,7 @@
         </v-list-item>
 
         <v-list-item class="ms-2">
-						<v-switch
+          <!-- <v-switch
               dark
 							v-model="alwaysClosed"
 							:label="alwaysClosed ? 'Navegador flotante' : 'Navegador persistente'"
@@ -60,19 +50,13 @@
 									{{ alwaysClosed ? 'Navegador flotante' : 'Navegador persistente' }}
 								</span>
 							</template>
-						</v-switch>
-					</v-list-item>
-          
+						</v-switch> -->
+         
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-      :clipped-left="true"
-      app
-      dark
-      dense
-      color="blue darken-4"
-    >
+    <v-app-bar :clipped-left="true" app dark dense color="blue darken-4">
       <v-app-bar-nav-icon @click="opciones_generales()"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Mi Aplicacion</v-toolbar-title>
@@ -105,25 +89,25 @@
 <script>
 export default {
   data: () => ({
+    colorChoose: false,
     drawer: null,
     alwaysClosed: false,
     drawerShown: true,
     dialog: false,
     nav: false,
     items: [
-      { title: "Hola mundo", icon: "mdi-view-dashboard", to: "/" },
       { title: "Principal", icon: "mdi-home-circle-outline", to: "/" },
-      { title: "Acerca de", icon: "mdi-home", to: "/about" },
-      { title: "Acceder", icon: "mdi-login", to: "/loginprueba" },
+      { title: "Listas", icon: "mdi-playlist-star", to: "/about" },
+      { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },
       { title: "Cards", icon: "mdi-card-multiple-outline", to: "/cards" },
+      { title: "Base de datos", icon: "mdi-database", to: "/consultas" },
     ],
   }),
   methods: {
-
     persistantDrawer() {
-			this.alwaysClosed = !this.alwaysClosed;
-		},
-    
+      this.alwaysClosed = !this.alwaysClosed;
+    },
+
     getUsers() {
       axios.get("http://localhost:8000/api/users").then((response) => {
         this.users = response.data.data;

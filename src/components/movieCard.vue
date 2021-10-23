@@ -13,55 +13,58 @@
         <!--Boton que sea una imagen y dentro de el tenga href -->
         <v-spacer>
           <!-- @click="comprar(index)" -->
-          <v-card
-            @mouseover="cardFocus(index)"
-            hover
-            width="400px"
-            elevation="24"
-            class="my-1 mb-1 px-1 pb-1 mt-1"
-          >
-            <v-card hover elevation="8" class="my-1 mb-1 px-1 pb-1 mt-1">
-              <v-img :src="agregar_imagen_lista(index)"> </v-img>
-            </v-card>
-            <v-card-title>
-              <strong>Precio: {{ task.precio }}</strong>
-            </v-card-title>
-            <v-card-subtitle>
-              {{ task.titulo }}
-            </v-card-subtitle>
-            <v-card-text>
-              <!--<ul>
+          <v-hover v-slot="{ hover }">
+            <v-card 
+              @mouseover="cardFocus(index)"
+              hover
+              width="400px"
+              :elevation="hover ? 24 : 2"
+              :class="{ 'on-hover': hover }"
+              class="my-1 mb-1 px-1 pb-1 mt-1"
+            >
+              <v-card hover elevation="8" class="my-1 mb-1 px-1 pb-1 mt-1">
+                <v-img :src="agregar_imagen_lista(index)"> </v-img>
+              </v-card>
+              <v-card-title class="text-h6">
+                <strong>Precio: {{ task.precio }}</strong>
+              </v-card-title>
+              <v-card-subtitle class="text-h6">
+                <strong> {{ task.titulo }} </strong>
+              </v-card-subtitle>
+              <v-card-text>
+                <!--<ul>
               <input type="text" v-model="amigo_nuevo" />
               <button @click="add_amigo">agregar amigo</button>
               <li v-for="(amigo, index) in $store.state.amigos" :key="index">
                 <h4> {{ amigo }} </h4>
               </li>
             </ul>-->
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue" dark class="mb-2" @click="comprar(index)">
-                Comprar
-              </v-btn>
-              <v-btn
-                color="blue"
-                dark
-                class="mb-2"
-                @click="accion_editar(index)"
-              >
-                Editar
-              </v-btn>
-              <v-btn
-                color="blue"
-                dark
-                class="mb-2"
-                @click="accion_borrar(index)"
-              >
-                Eliminar
-              </v-btn>
-            </v-card-actions>
-            <v-divider vertical> </v-divider>
-          </v-card>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue" dark class="mb-2" @click="comprar(index)">
+                  Comprar
+                </v-btn>
+                <v-btn
+                  color="blue"
+                  dark
+                  class="mb-2"
+                  @click="accion_editar(index)"
+                >
+                  Editar
+                </v-btn>
+                <v-btn
+                  color="blue"
+                  dark
+                  class="mb-2"
+                  @click="accion_borrar(index)"
+                >
+                  Eliminar
+                </v-btn>
+              </v-card-actions>
+              <v-divider vertical> </v-divider>
+            </v-card>
+          </v-hover>
         </v-spacer>
       </v-col>
     </v-row>

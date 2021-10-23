@@ -102,7 +102,7 @@
                     </v-row>
 
                     <v-row
-                      cols="10"
+                      cols="12"
                       sm="4"
                       md="10"
                       v-for="(elemento, indice) in $store.state.comprados"
@@ -129,7 +129,7 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="10" sm="4" md="10">
+                      <v-col cols="12" sm="4" md="10">
                         <v-alert
                           color="primary"
                           dark

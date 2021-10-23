@@ -29,7 +29,7 @@
                   </v-card-actions>
                 </template>
 
-                <v-card elevation="24" shaped>
+                <v-card elevation="0" shaped>
                   <v-row xs="12" sm="11" md="10" lg="8" xl="8">
                     <v-col
                       v-for="n in this.fotos.length"
@@ -38,19 +38,22 @@
                       cols="4"
                     >
                       <!--Boton que sea una imagen y dentro de el tenga href -->
-                      <v-card
-                        hover
-                        elevation="5"
-                        class="my-1 mb-1 px-1 pb-1 mt-1"
-                      >
-                        <v-img
-                          :src="retornar_Imagen(n)"
-                          aspect-ratio="1"
-                          class="grey lighten-2"
-                          @click="agregar_imagen_editar(n)"
+                      <v-hover v-slot="{ hover }">
+                        <v-card
+                          :elevation="hover ? 24 : 0"
+                          :class="{ 'on-hover': hover }"
+                          hover
+                          class="my-1 mb-1 px-1 pb-1 mt-1"
                         >
-                        </v-img>
-                      </v-card>
+                          <v-img
+                            :src="retornar_Imagen(n)"
+                            aspect-ratio="1"
+                            class="grey lighten-2"
+                            @click="agregar_imagen_editar(n)"
+                          >
+                          </v-img>
+                        </v-card>
+                      </v-hover>
 
                       <template v-slot:placeholder>
                         <v-row
@@ -69,11 +72,14 @@
 
                   <v-container>
                     <v-row>
-                      <v-col cols="3" sm="3" md="5">
+                      <v-col cols="4">
                         <v-text-field
                           v-model="buscar"
                           label="Buscar"
                         ></v-text-field>
+                      </v-col>
+
+                      <v-col cols="2">
                         <v-btn
                           @click="obtenerImagenes()"
                           class="mx-2"
@@ -83,6 +89,9 @@
                         >
                           <v-icon dark> mdi-magnify-plus-outline </v-icon>
                         </v-btn>
+                      </v-col>
+
+                      <v-col cols="6">
                         <v-btn
                           @click="mas_Imagenes()"
                           class="mx-2"
