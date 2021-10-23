@@ -1,34 +1,43 @@
 <template>
   <div class="login-container">
-    <form>
-      <!-- :error-messages="nameErrors" -->
-      <v-text-field
-        v-model="usuario"
-        :counter="10"
-        label="Usuario"
-        required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
-      ></v-text-field>
-      <!-- :error-messages="emailErrors" -->
+    <v-container fill-height fluid>
+      <v-row align="center" justify="center">
+        <v-col cols="3">
+          <form>
+            <!-- :error-messages="nameErrors" -->
+            <v-text-field
+              v-model="usuario"
+              :counter="10"
+              label="Usuario"
+              required
+              @input="$v.name.$touch()"
+              @blur="$v.name.$touch()"
+            ></v-text-field>
+            <!-- :error-messages="emailErrors" -->
 
-      <v-text-field
-        type="password"
-        v-model="password"
-        label="Contraseña"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
+            <v-text-field
+              type="password"
+              v-model="password"
+              label="Contraseña"
+              required
+              @input="$v.email.$touch()"
+              @blur="$v.email.$touch()"
+            ></v-text-field>
 
-      <v-btn class="mr-4" @click="submit"> Entrar </v-btn>
-      <v-btn @click="clear"> Borrar </v-btn>
-    </form>
+            <v-row align="center" justify="center">
+              <v-col cols="6">
+                <v-btn class="mr-4" @click="submit"> Entrar </v-btn>
+                <v-btn @click="clear"> Borrar </v-btn>
+              </v-col>
+            </v-row>
+          </form>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-
 //$v es para manipular los datos de vuelidate
 /*$dirty | Este valor nos indica si el usuario toco el campo o el formulario al menos una vez
 $invalid | Este valor muestra el estado de validación del modelo
@@ -88,13 +97,10 @@ export default {
 
   methods: {
     submit() {
-      this.$v.$touch();
-      if(this.usuario==="stiwar" && this.password==="123"){
-        this.$v.$touch();
+      if (this.usuario === "stiwar" && this.password === "123") {
         console.log("Correcto iniciando sesion");
-        this.usuario = "";
-        this.password = "";
-      }else{
+        this.$router.push({ path: 'consultas' })
+      } else {
         console.log("Usuario o contraseña incorrectos");
         this.usuario = "";
         this.password = "";
