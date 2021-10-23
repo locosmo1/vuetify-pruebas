@@ -47,7 +47,7 @@
                         >
                           <v-img
                             :src="retornar_Imagen(n)"
-                            aspect-ratio="1"
+                            aspect-ratio="0.6"
                             class="grey lighten-2"
                             @click="agregar_imagen_editar(n)"
                           >
