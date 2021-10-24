@@ -90,7 +90,6 @@ export default {
     this.iniciar_imagenes();
   },
   updated: function () {
-    console.log("ruta actual: "+this.$route.name);
   },
   methods: {
     getDatos(indice) {

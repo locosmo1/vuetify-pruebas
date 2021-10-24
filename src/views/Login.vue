@@ -102,7 +102,6 @@ export default {
   methods: {
     submit() {
       if (this.usuario === "stiwar" && this.password === "123") {
-        console.log("Correcto iniciando sesion");
         this.$router.push({ path: 'consultas' })
         //pagina para averiguar mas sobre vue router
         //https://codingpotions.com/vue-router

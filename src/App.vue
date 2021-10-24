@@ -2,12 +2,16 @@
 
 <template>
   <v-app id="inspire">
+    <!-- :permanent="!$vuetify.breakpoint.mdAndUp"
+      :mini-variant="true"
+      fixed-->
     <v-navigation-drawer
-      hide-overlay
+      :permanent="permanent"
       v-model="drawerShown"
       :temporary="alwaysClosed"
+      :mini-variant="variante"
       app
-      color="blue darken-4"
+      color="rgb(0, 18, 147)"
       clipped
       dark
     >
@@ -40,6 +44,14 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item>
+          <v-switch v-model="variante" :label="``"></v-switch>
+        </v-list-item>
+
+        <v-list-item>
+          <v-switch v-model="permanent" :label="``"></v-switch>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -49,9 +61,9 @@
       app
       dark
       dense
-      color="blue darken-4"
+      color="rgb(0, 18, 147)"
     >
-      <!-- <v-app-bar-nav-icon @click="opciones_generales()"></v-app-bar-nav-icon>-->
+      <v-app-bar-nav-icon @click="opciones_generales()"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Mi Aplicacion</v-toolbar-title>
 
@@ -82,31 +94,35 @@
 <script>
 export default {
   mounted() {
-    console.log("Mounted created");
     if (this.$route.name === "Login" || this.$route.name === "Home") {
       this.bar = false;
       this.drawerShown = false;
-    }else {
+      this.permanent = false;
+    } else {
       this.bar = true;
       this.drawerShown = true;
+      this.permanent = true;
     }
   },
   updated() {
-    console.log("ruta actual: "+this.$route.name);
     if (this.$route.name === "Login" || this.$route.name === "Home") {
       this.bar = false;
       this.drawerShown = false;
-    }else {
+      this.permanent = false;
+    } else {
       this.bar = true;
       this.drawerShown = true;
+      this.permanent = true;
     }
   },
   data: () => ({
-    bar: true, //this.$store.getters.conectado
-    drawerShown: true,
+    permanent: true,
+    variante: true,
+    bar: false, //this.$store.getters.conectado
+    drawerShown: false,
     colorChoose: false,
     drawer: null,
-    alwaysClosed: false,
+    alwaysClosed: false, //false
     dialog: false,
     nav: false,
     items: [
@@ -135,7 +151,7 @@ export default {
         {
           title: "Cerrar sesion",
           icon: "mdi-chevron-double-left",
-          to: "/about",
+          to: "/Login",
         },
       ];
     },
