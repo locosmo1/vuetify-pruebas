@@ -4,6 +4,10 @@
       <v-row align="center" justify="center">
         <v-col cols="3">
           <form>
+            <div align="center" justify="center">
+              <img  src="@/assets/logo.png"/>
+            </div>
+
             <!-- :error-messages="nameErrors" -->
             <v-text-field
               v-model="usuario"
@@ -26,8 +30,8 @@
 
             <v-row align="center" justify="center">
               <v-col cols="6">
-                <v-btn class="mr-4" @click="submit"> Entrar </v-btn>
-                <v-btn @click="clear"> Borrar </v-btn>
+                <v-btn dark color="primary" class="mr-4" @click="submit"> Entrar </v-btn>
+                <v-btn dark color="primary" @click="clear"> Borrar </v-btn>
               </v-col>
             </v-row>
           </form>
@@ -70,8 +74,8 @@ export default {
   },
 
   data: () => ({
-    password: "",
-    usuario: "",
+    password: "123",
+    usuario: "stiwar",
     select: null,
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: false,
@@ -100,6 +104,9 @@ export default {
       if (this.usuario === "stiwar" && this.password === "123") {
         console.log("Correcto iniciando sesion");
         this.$router.push({ path: 'consultas' })
+        //pagina para averiguar mas sobre vue router
+        //https://codingpotions.com/vue-router
+        
       } else {
         console.log("Usuario o contraseña incorrectos");
         this.usuario = "";
@@ -118,7 +125,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .login-container {
   height: 150px;
   /*IMPORTANTE*/

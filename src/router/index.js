@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/loginprueba',
-    name: 'Login',
+    name: 'loginprueba',
     component: () => import('../views/loginprueba.vue')
   },
   {
@@ -37,6 +37,11 @@ const routes = [
     path: '/Login',
     name: 'Login',
     component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: () => import('../views/Dashboard.vue')
   },
 ]
 

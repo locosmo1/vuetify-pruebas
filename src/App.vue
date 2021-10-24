@@ -3,6 +3,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
+      hide-overlay
       v-model="drawerShown"
       :temporary="alwaysClosed"
       app
@@ -13,7 +14,9 @@
       <v-list>
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="https://scontent.fbog15-1.fna.fbcdn.net/v/t1.18169-9/16807548_1174372649298950_4288151154757326868_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_eui2=AeFdpsTiBbc-9P5M72WzDODZHMQRXskdnZQcxBFeyR2dlGpF_DBEmk03fYJk8ktzatRu3j9dhfm40qJs7V5di14S&_nc_ohc=fk9TGTSrtOIAX-QY5pO&_nc_ht=scontent.fbog15-1.fna&oh=0e086079e48a9761c6ea3279d02e9977&oe=619A224B" />
+            <img
+              src="https://scontent.fbog15-1.fna.fbcdn.net/v/t1.18169-9/16807548_1174372649298950_4288151154757326868_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_eui2=AeFdpsTiBbc-9P5M72WzDODZHMQRXskdnZQcxBFeyR2dlGpF_DBEmk03fYJk8ktzatRu3j9dhfm40qJs7V5di14S&_nc_ohc=fk9TGTSrtOIAX-QY5pO&_nc_ht=scontent.fbog15-1.fna&oh=0e086079e48a9761c6ea3279d02e9977&oe=619A224B"
+            />
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -30,7 +33,6 @@
           link
         >
           <v-list-item-icon>
-            <!-- Error aqui -->
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
 
@@ -38,26 +40,18 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-        <v-list-item class="ms-2">
-          <!-- <v-switch
-              dark
-							v-model="alwaysClosed"
-							:label="alwaysClosed ? 'Navegador flotante' : 'Navegador persistente'"
-						>
-							<template v-slot:label>
-								<span class="secondary--text">
-									{{ alwaysClosed ? 'Navegador flotante' : 'Navegador persistente' }}
-								</span>
-							</template>
-						</v-switch> -->
-         
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar :clipped-left="true" app dark dense color="blue darken-4">
-      <v-app-bar-nav-icon @click="opciones_generales()"></v-app-bar-nav-icon>
+    <v-app-bar
+      v-model="bar"
+      :clipped-left="true"
+      app
+      dark
+      dense
+      color="blue darken-4"
+    >
+      <!-- <v-app-bar-nav-icon @click="opciones_generales()"></v-app-bar-nav-icon>-->
 
       <v-toolbar-title>Mi Aplicacion</v-toolbar-title>
 
@@ -74,7 +68,6 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <!-- aqui codigo del boton -->
       <v-btn icon>
         <v-icon @click="opciones_usuario()">mdi-dots-vertical</v-icon>
       </v-btn>
@@ -88,20 +81,39 @@
 
 <script>
 export default {
+  mounted() {
+    console.log("Mounted created");
+    if (this.$route.name === "Login" || this.$route.name === "Home") {
+      this.bar = false;
+      this.drawerShown = false;
+    }else {
+      this.bar = true;
+      this.drawerShown = true;
+    }
+  },
+  updated() {
+    console.log("ruta actual: "+this.$route.name);
+    if (this.$route.name === "Login" || this.$route.name === "Home") {
+      this.bar = false;
+      this.drawerShown = false;
+    }else {
+      this.bar = true;
+      this.drawerShown = true;
+    }
+  },
   data: () => ({
+    bar: true, //this.$store.getters.conectado
+    drawerShown: true,
     colorChoose: false,
     drawer: null,
     alwaysClosed: false,
-    drawerShown: true,
     dialog: false,
     nav: false,
     items: [
-      { title: "Principal", icon: "mdi-home-circle-outline", to: "/" },
       { title: "Listas", icon: "mdi-playlist-star", to: "/about" },
       { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },
       { title: "Cards", icon: "mdi-card-multiple-outline", to: "/cards" },
       { title: "Base de datos", icon: "mdi-database", to: "/consultas" },
-      { title: "login", icon: "mdi-database", to: "/Login" },
     ],
   }),
   methods: {
@@ -131,12 +143,10 @@ export default {
     opciones_generales() {
       this.drawer = this.drawer ? false : true;
       this.items = [
-        { title: "Principal", icon: "mdi-home-circle-outline", to: "/" },
         { title: "Listas", icon: "mdi-playlist-star", to: "/about" },
         { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },
         { title: "Cards", icon: "mdi-card-multiple-outline", to: "/cards" },
         { title: "Base de datos", icon: "mdi-database", to: "/consultas" },
-        { title: "login", icon: "mdi-database", to: "/Login" },
       ];
     },
 
