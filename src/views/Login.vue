@@ -5,7 +5,7 @@
         <v-col cols="3">
           <form>
             <div align="center" justify="center">
-              <img  src="@/assets/logo.png"/>
+              <img src="@/assets/logo.png"/>
             </div>
 
             <!-- :error-messages="nameErrors" -->
@@ -30,7 +30,9 @@
 
             <v-row align="center" justify="center">
               <v-col cols="6">
-                <v-btn dark color="primary" class="mr-4" @click="submit"> Entrar </v-btn>
+                <v-btn dark color="primary" class="mr-4" @click="submit">
+                  Entrar
+                </v-btn>
                 <v-btn dark color="primary" @click="clear"> Borrar </v-btn>
               </v-col>
             </v-row>
@@ -81,6 +83,9 @@ export default {
     checkbox: false,
   }),
 
+  mounted() {
+  },
+
   computed: {
     nameErrors() {
       const errors = [];
@@ -102,10 +107,9 @@ export default {
   methods: {
     submit() {
       if (this.usuario === "stiwar" && this.password === "123") {
-        this.$router.push({ path: 'consultas' })
+        this.$router.push({ path: "consultas" });
         //pagina para averiguar mas sobre vue router
         //https://codingpotions.com/vue-router
-        
       } else {
         console.log("Usuario o contraseña incorrectos");
         this.usuario = "";
@@ -114,19 +118,16 @@ export default {
     },
     clear() {
       this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.select = null;
-      this.checkbox = false;
+      this.usuario = "";
+      this.password = "";
     },
   },
 };
 </script>
 
-
+//height: 150px;
 <style scoped>
 .login-container {
-  height: 150px;
   /*IMPORTANTE*/
   display: flex;
   justify-content: center;

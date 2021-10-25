@@ -16,7 +16,7 @@
       dark
     >
       <v-list>
-        <v-list-item two-line>
+        <v-list-item left>
           <v-list-item-avatar>
             <img
               src="https://scontent.fbog15-1.fna.fbcdn.net/v/t1.18169-9/16807548_1174372649298950_4288151154757326868_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_eui2=AeFdpsTiBbc-9P5M72WzDODZHMQRXskdnZQcxBFeyR2dlGpF_DBEmk03fYJk8ktzatRu3j9dhfm40qJs7V5di14S&_nc_ohc=fk9TGTSrtOIAX-QY5pO&_nc_ht=scontent.fbog15-1.fna&oh=0e086079e48a9761c6ea3279d02e9977&oe=619A224B"
@@ -43,6 +43,19 @@
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn
+              rounded
+              color="primary"
+              elevation="24"
+              dark
+              @click="logout()"
+            >
+              <v-icon left> mdi-skip-next </v-icon>
+              Cerrar sesion
+            </v-btn>
         </v-list-item>
 
         <v-list-item>
@@ -94,7 +107,7 @@
 <script>
 export default {
   mounted() {
-    if (this.$route.name === "Login" || this.$route.name === "Home") {
+    if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
       this.bar = false;
       this.drawerShown = false;
       this.permanent = false;
@@ -105,7 +118,7 @@ export default {
     }
   },
   updated() {
-    if (this.$route.name === "Login" || this.$route.name === "Home") {
+    if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
       this.bar = false;
       this.drawerShown = false;
       this.permanent = false;
@@ -133,6 +146,10 @@ export default {
     ],
   }),
   methods: {
+    logout() {
+      this.$router.replace({ path: 'Login' })
+    },
+
     persistantDrawer() {
       this.alwaysClosed = !this.alwaysClosed;
     },
@@ -148,11 +165,6 @@ export default {
       this.items = [
         { title: "Configuraciones", icon: "mdi-view-dashboard", to: "/" },
         { title: "Ayuda", icon: "mdi-home-circle-outline", to: "/" },
-        {
-          title: "Cerrar sesion",
-          icon: "mdi-chevron-double-left",
-          to: "/Login",
-        },
       ];
     },
 
