@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {//Datos globales
+    conectado: false,
     nombre: "Jhon",
     apellido: "Stiwar",
     amigos: ['ana', 'caballo'],
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     comprados(state){
       return state.comprados
+    },
+    conectado(state){
+      return state.conectado
     }
   },
   modules: {//Recoleccion de estados, mutaciones, acciones, getters

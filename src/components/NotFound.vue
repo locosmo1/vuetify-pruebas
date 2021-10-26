@@ -37,8 +37,7 @@
 </template>
 
 <script>
-
-export default ({
+export default {
   data() {
     return {
       index: 0,
@@ -49,10 +48,14 @@ export default ({
       this.index = index;
     },
     goIndex() {
-      this.$router.push({ name: "Login" });
+      if (this.$store.state.conectado == true) {
+        this.$router.push({ name: "consultas" })
+      } else {
+        this.$router.push({ name: "Login" });
+      }
     },
   },
-});
+};
 </script>
 
 

@@ -14,7 +14,7 @@
         <v-spacer>
           <!-- @click="comprar(index)" -->
           <v-hover v-slot="{ hover }">
-            <v-card 
+            <v-card
               @mouseover="cardFocus(index)"
               hover
               width="400px"
@@ -41,26 +41,35 @@
             </ul>-->
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue" dark class="mb-2" @click="comprar(index)">
-                  Comprar
-                </v-btn>
-                <v-btn
-                  color="blue"
-                  dark
-                  class="mb-2"
-                  @click="accion_editar(index)"
-                >
-                  Editar
-                </v-btn>
-                <v-btn
-                  color="blue"
-                  dark
-                  class="mb-2"
-                  @click="accion_borrar(index)"
-                >
-                  Eliminar
-                </v-btn>
+                <v-row xs="12" sm="11" md="10" lg="8" xl="8">
+                  <v-col class="d-lg-flex">
+                    <!--<v-spacer></v-spacer>-->
+                    <v-btn
+                      color="blue"
+                      dark
+                      class="mb-2"
+                      @click="comprar(index)"
+                    >
+                      Comprar
+                    </v-btn>
+                    <v-btn
+                      color="blue"
+                      dark
+                      class="mb-2"
+                      @click="accion_editar(index)"
+                    >
+                      Editar
+                    </v-btn>
+                    <v-btn
+                      color="blue"
+                      dark
+                      class="mb-2"
+                      @click="accion_borrar(index)"
+                    >
+                      Eliminar
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-card-actions>
               <v-divider vertical> </v-divider>
             </v-card>

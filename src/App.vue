@@ -47,15 +47,16 @@
 
         <v-list-item>
           <v-btn
-              rounded
-              color="primary"
-              elevation="24"
-              dark
-              @click="logout()"
-            >
-              <v-icon left> mdi-skip-next </v-icon>
-              Cerrar sesion
-            </v-btn>
+            v-if="drawer"
+            rounded
+            color="rgb(0, 18, 147)"
+            dark
+            @click="logout()"
+            v-model="cerrarSesion"
+          >
+            <v-icon left> mdi-skip-next </v-icon>
+            Cerrar sesion
+          </v-btn>
         </v-list-item>
 
         <v-list-item>
@@ -107,34 +108,43 @@
 <script>
 export default {
   mounted() {
+    
     if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
       this.bar = false;
       this.drawerShown = false;
       this.permanent = false;
-    } else {
+    }
+
+    if (this.$store.state.conectado && this.$route.name != "NotFound") {
       this.bar = true;
       this.drawerShown = true;
       this.permanent = true;
     }
   },
   updated() {
+
     if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
       this.bar = false;
       this.drawerShown = false;
       this.permanent = false;
-    } else {
+    }else if (this.$store.state.conectado === false) {
+      this.$router.replace({ path: 'Login' });
+    }
+    if (this.$store.state.conectado && this.$route.name != "NotFound") {
       this.bar = true;
       this.drawerShown = true;
       this.permanent = true;
     }
   },
+
   data: () => ({
+    cerrarSesion: true,
     permanent: true,
     variante: true,
-    bar: false, //this.$store.getters.conectado
-    drawerShown: false,
+    bar: true, //this.$store.getters.conectado
+    drawerShown: true,
     colorChoose: false,
-    drawer: null,
+    drawer: false,
     alwaysClosed: false, //false
     dialog: false,
     nav: false,
@@ -147,7 +157,8 @@ export default {
   }),
   methods: {
     logout() {
-      this.$router.replace({ path: 'Login' })
+      this.$store.state.conectado = false;
+      this.$router.replace({ path: 'Login' });
     },
 
     persistantDrawer() {
@@ -161,15 +172,15 @@ export default {
     },
 
     opciones_usuario() {
-      this.drawer = this.drawer ? false : true;
+      this.drawer = true;
       this.items = [
-        { title: "Configuraciones", icon: "mdi-view-dashboard", to: "/" },
-        { title: "Ayuda", icon: "mdi-home-circle-outline", to: "/" },
+        { title: "Configuraciones", icon: "mdi-cog-outline", to: "/" },
+        { title: "Ayuda", icon: "mdi-information-outline", to: "/" },
       ];
     },
 
     opciones_generales() {
-      this.drawer = this.drawer ? false : true;
+      this.drawer = false;
       this.items = [
         { title: "Listas", icon: "mdi-playlist-star", to: "/about" },
         { title: "Tablas", icon: "mdi-table-plus", to: "/loginprueba" },

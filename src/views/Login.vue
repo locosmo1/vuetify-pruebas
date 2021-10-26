@@ -109,6 +109,7 @@ export default {
   },
 
   data: () => ({
+    conectado: false,
     password: "123",
     usuario: "stiwar",
     select: null,
@@ -139,11 +140,12 @@ export default {
   methods: {
     submit() {
       if (this.usuario === "stiwar" && this.password === "123") {
+        this.$store.state.conectado = true
         this.$router.push({ path: "consultas" });
         //pagina para averiguar mas sobre vue router
         //https://codingpotions.com/vue-router
       } else {
-        console.log("Usuario o contraseña incorrectos");
+        this.$store.state.conectado = false
         this.usuario = "";
         this.password = "";
       }

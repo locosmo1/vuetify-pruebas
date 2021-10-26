@@ -3,8 +3,8 @@
     <v-chip-group>
       <v-card hover elevation="0" class="my-1 mb-1 px-1 pb-1 mt-1">
         <v-container>
-          <v-row :justify="'start'">
-            <v-col>
+          <v-row :justify="'start'" xs="12" sm="11" md="10" lg="8" xl="8">
+            <v-col class="d-lg-flex">
               <!-- Primera columna es la creacion de nuevos productos -->
               <v-dialog
                 absolute
@@ -14,18 +14,22 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-card-actions class="px-3 pb-3">
                     <v-spacer></v-spacer>
-                    <v-btn
-                      rounded
-                      color="primary"
-                      elevation="24"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="$store.state.editar = false"
-                    >
-                      <v-icon left> mdi-cart-plus </v-icon>
-                      Nuevo Producto
-                    </v-btn>
+                    <v-row xs="12" sm="11" md="10" lg="8" xl="8">
+                      <v-col class="d-lg-flex">
+                        <v-btn
+                          rounded
+                          color="primary"
+                          elevation="24"
+                          dark
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="$store.state.editar = false"
+                        >
+                          <v-icon left> mdi-cart-plus </v-icon>
+                          Nuevo Producto
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card-actions>
                 </template>
 
@@ -146,7 +150,7 @@
             </v-col>
 
             <!--Segunda columna es para ver todos los productos que hay en el carrito -->
-            <v-col>
+            <v-col class="d-lg-flex">
               <v-dialog
                 absolute
                 v-model="$store.state.dialogProductos"
@@ -154,17 +158,21 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-card-actions class="px-3 pb-3">
-                    <v-btn
-                      v-bind="attrs"
-                      v-on="on"
-                      rounded
-                      color="primary"
-                      elevation="24"
-                      dark
-                    >
-                      <v-icon left> mdi-cart-outline </v-icon>
-                      Ir a carrito
-                    </v-btn>
+                    <v-row xs="12" sm="11" md="10" lg="8" xl="8">
+                      <v-col class="d-lg-flex">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          rounded
+                          color="primary"
+                          elevation="24"
+                          dark
+                        >
+                          <v-icon left> mdi-cart-outline </v-icon>
+                          Ir a carrito
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card-actions>
                 </template>
 
