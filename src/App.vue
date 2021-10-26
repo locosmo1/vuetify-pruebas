@@ -108,32 +108,57 @@
 <script>
 export default {
   mounted() {
-    
-    if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
-      this.bar = false;
-      this.drawerShown = false;
-      this.permanent = false;
-    }
 
-    if (this.$store.state.conectado && this.$route.name != "NotFound") {
-      this.bar = true;
-      this.drawerShown = true;
-      this.permanent = true;
-    }
-  },
-  updated() {
-
-    if (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound") {
+    if (((this.$store.state.conectado === false) && (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound"))) {
       this.bar = false;
       this.drawerShown = false;
       this.permanent = false;
     }else if (this.$store.state.conectado === false) {
       this.$router.replace({ path: 'Login' });
     }
-    if (this.$store.state.conectado && this.$route.name != "NotFound") {
+    //Se ejecuta al iniciar sesion
+    if (this.$store.state.conectado && this.$route.name != "NotFound" && this.$route.name != "Login") {
       this.bar = true;
       this.drawerShown = true;
       this.permanent = true;
+    }else if (this.$route.name === "Login" && this.$store.state.conectado) {
+      this.bar = false;
+      this.drawerShown = false;
+      this.permanent = false;
+      this.$store.state.conectado = false
+    }
+    if(this.$route.name === "NotFound"){
+      this.bar = false;
+      this.drawerShown = false;
+      this.permanent = false;
+    }
+
+  },
+
+  updated() {
+    //Se ejecuta al inicio
+    if (((this.$store.state.conectado === false) && (this.$route.name === "Login" || this.$route.name === "Home" || this.$route.name === "NotFound"))) {
+      this.bar = false;
+      this.drawerShown = false;
+      this.permanent = false;
+    }else if (this.$store.state.conectado === false) {
+      this.$router.replace({ path: 'Login' });
+    }
+    //Se ejecuta al iniciar sesion
+    if (this.$store.state.conectado && this.$route.name != "NotFound" && this.$route.name != "Login") {
+      this.bar = true;
+      this.drawerShown = true;
+      this.permanent = true;
+    }else if (this.$route.name === "Login" && this.$store.state.conectado) {
+      this.bar = false;
+      this.drawerShown = false;
+      this.permanent = false;
+      this.$store.state.conectado = false
+    }
+    if(this.$route.name === "NotFound"){
+      this.bar = false;
+      this.drawerShown = false;
+      this.permanent = false;
     }
   },
 
