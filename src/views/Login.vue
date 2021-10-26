@@ -1,6 +1,6 @@
 <template>
-  <div class="login-container">
-    <v-container fill-height fluid>
+  <div>
+    <!-- <v-container fill-height fluid>
       <v-row align="center" justify="center">
         <v-col cols="3">
           <form>
@@ -8,7 +8,7 @@
               <img src="@/assets/logo.png"/>
             </div>
 
-            <!-- :error-messages="nameErrors" -->
+            :error-messages="nameErrors"
             <v-text-field
               v-model="usuario"
               :counter="10"
@@ -17,7 +17,7 @@
               @input="$v.name.$touch()"
               @blur="$v.name.$touch()"
             ></v-text-field>
-            <!-- :error-messages="emailErrors" -->
+            :error-messages="emailErrors"
 
             <v-text-field
               type="password"
@@ -39,7 +39,40 @@
           </form>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> -->
+
+    <div class="text-xs-center">
+      <!--<v-btn primary> texto </v-btn>-->
+    </div>
+    <v-card-actions class="justify-center">
+      <div align="center" justify="center">
+        <form>
+          <v-img src="@/assets/logo.png"> </v-img>
+          <v-text-field
+            v-model="usuario"
+            :counter="10"
+            label="Usuario"
+            required
+            @input="$v.name.$touch()"
+            @blur="$v.name.$touch()"
+          ></v-text-field>
+          <!-- :error-messages="emailErrors" -->
+
+          <v-text-field
+            type="password"
+            v-model="password"
+            label="Contraseña"
+            required
+            @input="$v.email.$touch()"
+            @blur="$v.email.$touch()"
+          ></v-text-field>
+          <v-btn color="primary" dark class="mb-1" @click="submit">
+            Entrar
+          </v-btn>
+          <v-btn color="blue" dark class="mb-1" @click="clear"> borrar </v-btn>
+        </form>
+      </div>
+    </v-card-actions>
   </div>
 </template>
 
@@ -83,8 +116,7 @@ export default {
     checkbox: false,
   }),
 
-  mounted() {
-  },
+  mounted() {},
 
   computed: {
     nameErrors() {
