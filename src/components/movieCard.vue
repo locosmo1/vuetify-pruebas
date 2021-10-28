@@ -17,7 +17,7 @@
             <v-card
               @mouseover="cardFocus(index)"
               hover
-              width="400px"
+              width="320px"
               :elevation="hover ? 24 : 2"
               :class="{ 'on-hover': hover }"
               class="my-1 mb-1 px-1 pb-1 mt-1"
@@ -47,7 +47,7 @@
                     <v-btn
                       color="blue"
                       dark
-                      class="mb-2"
+                      class="mb-0"
                       @click="comprar(index)"
                     >
                       Comprar
@@ -55,7 +55,7 @@
                     <v-btn
                       color="blue"
                       dark
-                      class="mb-2"
+                      class="mb-0"
                       @click="accion_editar(index)"
                     >
                       Editar
@@ -63,7 +63,7 @@
                     <v-btn
                       color="blue"
                       dark
-                      class="mb-2"
+                      class="mb-0"
                       @click="accion_borrar(index)"
                     >
                       Eliminar
