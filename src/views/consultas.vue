@@ -125,19 +125,20 @@ export default {
       let nuevo = [];
       axios
         .get(
-          "https://epsasesp.com/wp-content/practicas_php_vuejs/obtenerProducto.php",
+          "https://localhost:44370/api/prueba",
           {
             responseType: "json",
           }
         )
         .then(function (res) {
           if (res.status == 200) {
-            for (let i = 0; i < res.data.datos.length; i++) {
+            console.log(res.data.length)
+            for (let i = 0; i < res.data.length; i++) {
               let np = {
-                titulo: res.data.datos[i].nombre,
-                subtitulo: res.data.datos[i].nombre,
-                precio: res.data.datos[i].precio,
-                imagen: res.data.datos[i].urlImagen,
+                titulo: res.data[i].nombre,
+                subtitulo: res.data[i].nombre,
+                precio: res.data[i].precio,
+                imagen: res.data[i].urlImagen,
               };
               nuevo.push(np);
             }
